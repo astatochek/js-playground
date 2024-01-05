@@ -8,8 +8,21 @@ body {
 
 @layer base {
   :focus {
-    outline:none;
-    border:0;
+    outline: none;
+    border: 0;
     -moz-outline-style: none;
-}
+  }
+
+  .kanagawa-bg {
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/a/a5/Tsunami_by_hokusai_19th_century.jpg");
+    background-size: cover;
+    position: sticky;
+    height: 100%;
+    width: 100%;
+    opacity: 0.02;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
 }

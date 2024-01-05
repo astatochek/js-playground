@@ -8,7 +8,7 @@
 </script>
 
 <div
-  class="flex justify-start items-start w-96 h-64 bg-editor-background rounded-lg border-2 border-editor-border py-1.5 overflow-y-hidden overflow-x-hidden"
+  class="flex justify-center items-start w-full h-64 bg-editor-background rounded-lg border-2 border-editor-border py-1.5 overflow-y-hidden overflow-x-hidden"
 >
   <div
     class="flex flex-row justify-start items-start min-w-full min-h-full w-fit h-fit overflow-y-visible"

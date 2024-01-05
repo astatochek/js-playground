@@ -8,7 +8,9 @@ export default {
         "editor-background": "#1f1f28",
         "editor-variable": "#c8c3a6",
         "theme-blue": "#7e9cd8",
-        "editor-border": "#33333c"
+        "editor-border": "#33333c",
+        "theme-red": "#d8616b",
+        "theme-green": "#98bb6c"
       }
     },
   },

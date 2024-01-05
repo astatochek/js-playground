@@ -24,3 +24,8 @@ export function encode(string: string): string {
     return ""
   }
 }
+
+export function toURL(url: string, encoded: string): string {
+  const base = url.split('?code=')[0]
+  return `${base}?code=${encoded}`
+}
