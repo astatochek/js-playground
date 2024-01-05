@@ -1,9 +1,12 @@
 <script lang="ts">
   import Editor from "./lib/components/Editor.svelte";
   import { createRunCodeFn } from "./lib/utils/run";
+  import {decode, encode, parseParams} from "./lib/utils/helpers";
+
+  const urlParams = new URLSearchParams(window.location.search)
 
   let out = "";
-  let code = "setTimeout(() => { console.log('test'); }, 500)";
+  let code = decode(parseParams(urlParams)) || "console.log(42)";
 
   function addToOutput(...args: any[]) {
     out += `${args.join(" ")}\n`;
@@ -14,12 +17,16 @@
   }
 
   const runCode = createRunCodeFn();
+
+  function onRunCode() {
+    runCode(code, addToOutput, clearOutput)
+  }
 </script>
 
 <main class="flex flex-col justify-start items-center pt-20 gap-2">
   <Editor bind:code />
   <button
-    on:click={() => runCode(code, addToOutput, clearOutput)}
+    on:click={onRunCode}
     class="bg-theme-blue text-editor-background px-2.5 py-1.5 rounded-lg uppercase font-bold"
     >Run Code</button
   >
