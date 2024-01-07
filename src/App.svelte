@@ -2,6 +2,11 @@
   import Editor from "./lib/components/Editor.svelte";
   import { createRunCodeFn } from "./lib/utils/run";
   import { decode, encode, parseParams, toURL } from "./lib/utils/helpers";
+  import Toast from "./lib/components/Toast.svelte";
+  import { notifications } from "./lib/stores/notifications";
+  const { success, danger } = notifications;
+
+  const DURATION_MS = 5000;
 
   const urlParams = new URLSearchParams(window.location.search);
 
@@ -27,15 +32,20 @@
   }
 
   function onShareCode() {
-    const url = toURL(window.location.href, encode(code))
-    navigator.clipboard.writeText(url)
+    const url = toURL(window.location.href, encode(code));
+    navigator.clipboard
+      .writeText(url)
+      .then(() => success(`Copied URL to clipboard!`, DURATION_MS))
+      .catch(() => danger("Failed to copy URL to clipboard", DURATION_MS));
   }
 </script>
 
-<div class="overflow-hidden relative w-full h-dvh flex flex-col justify-start items-center">
+<div
+  class="overflow-hidden relative w-full h-dvh flex flex-col justify-start items-center"
+>
   <div class="kanagawa-bg"></div>
   <main
-    class="flex flex-col justify-start items-center w-full sm:w-96 pt-20 gap-2"
+    class="flex flex-col justify-start items-center w-full px-1 sm:w-96 pt-1 sm:pt-20 sm:px-0 gap-2"
   >
     <Editor bind:code />
     <div class="flex flex-row justify-center gap-2">
@@ -65,3 +75,4 @@
     {/if}
   </main>
 </div>
+<Toast />
