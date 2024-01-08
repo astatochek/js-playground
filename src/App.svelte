@@ -4,9 +4,7 @@
   import { decode, encode, parseParams, toURL } from "./lib/utils/helpers";
   import Toast from "./lib/components/Toast.svelte";
   import { notifications } from "./lib/stores/notifications";
-  const { success, danger } = notifications;
-
-  const DURATION_MS = 5000;
+  const { success, danger, info } = notifications;
 
   const urlParams = new URLSearchParams(window.location.search);
 
@@ -28,6 +26,9 @@
   }
 
   function onClearOutput() {
+    if (out !== "") {
+      info("Console cleared")
+    }
     out = "";
   }
 
@@ -35,17 +36,17 @@
     const url = toURL(window.location.href, encode(code));
     navigator.clipboard
       .writeText(url)
-      .then(() => success(`Copied URL to clipboard!`, DURATION_MS))
-      .catch(() => danger("Failed to copy URL to clipboard", DURATION_MS));
+      .then(() => success("Copied URL to clipboard!"))
+      .catch(() => danger("Failed to copy URL to clipboard"));
   }
 </script>
 
 <div
-  class="overflow-hidden relative w-full h-dvh flex flex-col justify-start items-center"
+  class="overflow-hidden relative w-full min-h-[30rem] h-dvh flex flex-col justify-start items-center"
 >
   <div class="kanagawa-bg"></div>
   <main
-    class="flex flex-col justify-start items-center w-full px-1 sm:w-96 pt-1 sm:pt-20 sm:px-0 gap-2"
+    class="flex flex-col justify-start items-center w-full h-full px-1 sm:w-96 py-1 sm:py-10 sm:px-0 gap-2"
   >
     <Editor bind:code />
     <div class="flex flex-row justify-center gap-2">
@@ -66,13 +67,13 @@
       >
     </div>
 
-    {#if out !== ""}
-      <div
-        class="flex text-editor-variable max-h-32 overflow-y-scroll text-left text-sm justify-start items-start w-full bg-editor-background rounded-lg border-2 border-editor-border py-1.5 px-2.5"
+    <div
+        class="flex text-editor-variable h-full overflow-y-scroll text-left text-sm flex-col justify-start items-start w-full bg-editor-background rounded-lg border-2 border-editor-border py-1.5 px-2.5"
       >
-        <pre>{out}</pre>
+        {#each out.split('\n') as line, i (i) }
+          <div>{line}</div>
+        {/each}
       </div>
-    {/if}
   </main>
 </div>
 <Toast />

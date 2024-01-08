@@ -3,7 +3,7 @@ import { timer } from "rxjs";
 
 export type Notification = {
   id: string;
-  type: "danger" | "success";
+  type: "danger" | "success" | "info";
   message: string;
   timeout: number;
 };
@@ -33,9 +33,9 @@ function createNotificationStore() {
 
   return {
     subscribe,
-    send,
-    danger: (msg: string, timeout: number) => send(msg, "danger", timeout),
-    success: (msg: string, timeout: number) => send(msg, "success", timeout),
+    danger: (msg: string, timeout: number) => send(msg, "danger", 5000),
+    success: (msg: string, timeout: number) => send(msg, "success", 5000),
+    info: (msg: string, timeout: number) => send(msg, "info", 1000),
     deleteById: (id: string) => deleteById(id)
   };
 }

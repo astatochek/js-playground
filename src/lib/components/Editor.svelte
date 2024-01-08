@@ -7,10 +7,10 @@
 </script>
 
 <div
-  class="w-full h-64 bg-editor-background rounded-lg border-2 border-editor-border py-1.5 overflow-auto"
+  class="w-full h-64 bg-editor-background rounded-lg border-2 border-editor-border overflow-auto"
 >
   <CodeMirror
-    class="w-full h-full"
+    class="w-full h-full text-sm"
     bind:value={code}
     lang={javascript()}
     theme={oneDark}
