@@ -7,7 +7,7 @@
 </script>
 
 <div
-  class="w-full h-64 bg-editor-background rounded-lg border-2 border-editor-border overflow-auto"
+  class="w-full max-h-64 bg-editor-background rounded-lg border-2 border-editor-border overflow-auto"
 >
   <CodeMirror
     class="w-full h-full text-sm"
