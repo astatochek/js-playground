@@ -4,7 +4,7 @@
   import { decode, encode, parseParams, toURL } from "./lib/utils/helpers";
   import Toast from "./lib/components/Toast.svelte";
   import { notifications } from "./lib/stores/notifications";
-  const { success, danger, info } = notifications;
+  const { notifySuccess, notifyDanger, notifyInfo } = notifications;
 
   const urlParams = new URLSearchParams(window.location.search);
 
@@ -27,7 +27,7 @@
 
   function onClearOutput() {
     if (out !== "") {
-      info("Console cleared")
+      notifyInfo("Console cleared");
     }
     out = "";
   }
@@ -36,8 +36,8 @@
     const url = toURL(window.location.href, encode(code));
     navigator.clipboard
       .writeText(url)
-      .then(() => success("Copied URL to clipboard!"))
-      .catch(() => danger("Failed to copy URL to clipboard"));
+      .then(() => notifySuccess("Copied URL to clipboard!"))
+      .catch(() => notifyDanger("Failed to copy URL to clipboard"));
   }
 </script>
 
@@ -68,12 +68,12 @@
     </div>
 
     <div
-        class="flex text-editor-variable h-full overflow-y-scroll text-left text-sm flex-col justify-start items-start w-full bg-editor-background rounded-lg border-2 border-editor-border py-1.5 px-2.5"
-      >
-        {#each out.split('\n') as line, i (i) }
-          <div>{line}</div>
-        {/each}
-      </div>
+      class="flex text-editor-variable h-full overflow-y-scroll text-left text-sm flex-col justify-start items-start w-full bg-editor-background rounded-lg border-2 border-editor-border py-1.5 px-2.5"
+    >
+      {#each out.split("\n") as line, i (i)}
+        <div>{line}</div>
+      {/each}
+    </div>
   </main>
 </div>
 <Toast />

@@ -33,9 +33,9 @@ function createNotificationStore() {
 
   return {
     subscribe,
-    danger: (msg: string, timeout: number) => send(msg, "danger", 5000),
-    success: (msg: string, timeout: number) => send(msg, "success", 5000),
-    info: (msg: string, timeout: number) => send(msg, "info", 1000),
+    notifyDanger: (msg: string) => send(msg, "danger", 3000),
+    notifySuccess: (msg: string) => send(msg, "success", 3000),
+    notifyInfo: (msg: string) => send(msg, "info", 1000),
     deleteById: (id: string) => deleteById(id)
   };
 }
